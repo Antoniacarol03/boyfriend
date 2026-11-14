@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do You Love Me?</title>
+<style>
+html,body{height:100%;margin:0}
+body{background:#2a0f2e;color:#fff1f4;font-family:Georgia,serif;display:flex;align-items:center;justify-content:center;text-align:center}
+.card{padding:24px}
+h1{font-size:clamp(2.4rem,11vw,4.5rem);margin:0 0 .6em}
+.btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+button{font:inherit;font-size:1.4rem;border:0;border-radius:999px;padding:.7em 1.8em;cursor:pointer}
+#yes{background:#ff4d7a;color:#fff}
+#no{background:#3d2142;color:#fff1f4}
+@keyframes shake{0%,100%{transform:translate(0,0) rotate(0)}10%{transform:translate(-14px,6px) rotate(-3deg)}20%{transform:translate(12px,-8px) rotate(3deg)}30%{transform:translate(-16px,-4px) rotate(-4deg)}40%{transform:translate(14px,8px) rotate(4deg)}50%{transform:translate(-10px,-10px) rotate(-2deg)}60%{transform:translate(12px,6px) rotate(3deg)}70%{transform:translate(-14px,4px) rotate(-3deg)}80%{transform:translate(10px,-6px) rotate(2deg)}90%{transform:translate(-6px,4px) rotate(-1deg)}}
+.shake{animation:shake .7s ease-in-out 3}
+#scare{position:fixed;inset:0;background:#000;display:none;align-items:center;justify-content:center;z-index:10}
+#scare.on{display:flex}
+#scare svg{width:min(100vw,100vh);height:min(100vw,100vh);animation:zoom .25s ease-out,flick .12s steps(2) 6}
+@keyframes zoom{from{transform:scale(.3)}to{transform:scale(1)}}
+@keyframes flick{50%{filter:invert(1)}}
+#close{position:absolute;top:12px;right:12px;background:#222;color:#ddd;font-size:1rem;padding:.5em 1em}
+</style>
+</head>
+<body>
+<main class="card" id="card">
+  <h1 id="q">Do You Love Me?</h1>
+  <div class="btns">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+</main>
+
+<div id="scare">
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" fill="#050000"/>
+    <ellipse cx="200" cy="210" rx="125" ry="165" fill="#d9d4c7"/>
+    <ellipse cx="200" cy="210" rx="125" ry="165" fill="none" stroke="#5a0000" stroke-width="6"/>
+    <path d="M120 120 Q150 150 140 190 M280 120 Q250 150 262 190 M200 60 Q205 100 195 130" stroke="#8b0000" stroke-width="3" fill="none"/>
+    <ellipse cx="148" cy="170" rx="42" ry="52" fill="#000"/>
+    <ellipse cx="252" cy="170" rx="42" ry="52" fill="#000"/>
+    <circle cx="152" cy="178" r="7" fill="#fff"/>
+    <circle cx="248" cy="178" r="7" fill="#fff"/>
+    <path d="M196 215 L204 215 L210 260 L190 260 Z" fill="#1a1a1a"/>
+    <path d="M110 290 Q200 400 290 290 Q200 330 110 290 Z" fill="#000"/>
+    <path d="M125 295 L135 322 L145 302 L158 332 L170 308 L185 338 L200 310 L215 338 L230 308 L242 332 L255 302 L265 322 L275 295" fill="none" stroke="#e8e2d0" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M150 340 L148 385 M200 345 L202 395 M252 340 L255 380" stroke="#8b0000" stroke-width="5"/>
+  </svg>
+  <button id="close">Close</button>
+</div>
+
+<script>
+var q = new URLSearchParams(location.search).get("q");
+if (q) { document.getElementById("q").textContent = q; document.title = q; }
+var card = document.getElementById("card"), scare = document.getElementById("scare");
+document.getElementById("yes").onclick = function () {
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  if (navigator.vibrate) navigator.vibrate([200,80,200,80,200]);
+};
+document.getElementById("no").onclick = function () { scare.classList.add("on"); };
+document.getElementById("close").onclick = function () { scare.classList.remove("on"); };
+</script>
+</body>
+</html>
