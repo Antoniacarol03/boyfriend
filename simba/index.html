@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simba</title>
+<style>
+:root{--bg1:#f4efe0;--bg2:#dcebe4;--title:#2f6b73;--ink:#6b4a3a;--card:#fffdf8;--card-ink:#5a3d31;--ring:#9cc5d6;--rose:#e0993a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg1:#f4efe0;--bg2:#dcebe4}}
+:root[data-theme="dark"]{--bg1:#f4efe0;--bg2:#dcebe4}
+html,body{margin:0;min-height:100%}
+body{background:linear-gradient(var(--bg1),var(--bg2)) fixed;color:var(--ink);font-family:Georgia,"Times New Roman",serif;text-align:center;overflow-x:hidden}
+.glow{position:fixed;bottom:-120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(214,238,230,.3) 70%,transparent);animation:rise linear infinite;pointer-events:none}
+@keyframes rise{to{transform:translateY(-115vh)}}
+main{max-width:480px;margin:0 auto;padding:22px 16px 40px;position:relative}
+h1{font-size:clamp(2.2rem,10vw,3rem);margin:6px 0 2px;color:var(--title);font-weight:400;font-style:italic;letter-spacing:.5px}
+.sub{margin:0 0 6px;font-size:1.05rem}
+.stage{position:relative}
+#cat{width:100%;max-width:400px;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;animation:idle 3s ease-in-out infinite}
+@keyframes idle{50%{transform:translateY(-5px)}}
+#cat.purr{animation:wig .2s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg) scale(1.015)}}
+#tail{transform-origin:290px 372px;animation:sway 2.4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+#happy{display:none}
+#cat.purr #happy{display:inline}
+#cat.purr #open{display:none}
+.heart{position:absolute;pointer-events:none;font-size:28px;color:var(--rose);animation:up 1.8s ease-out forwards}
+@keyframes up{to{transform:translateY(-150px) scale(1.3);opacity:0}}
+#msg{background:var(--card);color:var(--card-ink);border:3px solid var(--ring);border-radius:24px;padding:18px 22px;margin:14px auto 0;max-width:420px;min-height:3.4em;font-size:1.3rem;font-style:italic;line-height:1.35;box-shadow:0 8px 22px rgba(150,100,80,.18);display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+#msg.pop{animation:pop .5s ease-out}
+@keyframes pop{from{transform:translateY(8px);opacity:0}}
+#from{margin:10px 0 0;font-size:1.1rem;color:var(--title)}
+#count{margin:10px 0 0;font-size:.95rem}
+#snd{font:inherit;font-size:1rem;background:#fffdf8;color:var(--ink);border:2px solid var(--ring);border-radius:999px;padding:.5em 1.2em;margin-top:12px;cursor:pointer}
+#snd:focus-visible{outline:3px solid var(--title);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){#tail,.glow,#cat,#cat.purr{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Simba</h1>
+  <p class="sub" id="sub">Pet Simba to hear him purr and get a little love ♥</p>
+  <div class="stage" id="stage">
+    <svg id="cat" viewBox="0 0 400 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simba, a cute round yellow cat with big light green eyes. Pet him to receive a love message.">
+      <defs><radialGradient id="eg" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#eaffcf"/><stop offset="1" stop-color="#8fd45f"/></radialGradient></defs>
+      <ellipse cx="200" cy="421" rx="140" ry="8" fill="rgba(150,100,80,.2)"/>
+      <g id="tail"><path d="M290 372 C366 384 392 322 356 278" fill="none" stroke="#f4b04a" stroke-width="30" stroke-linecap="round"/><path d="M350 330 l22 -8 M358 304 l22 -4" stroke="#dc8f2c" stroke-width="7" stroke-linecap="round"/></g>
+      <ellipse cx="200" cy="342" rx="120" ry="88" fill="#f4b04a"/>
+      <ellipse cx="200" cy="364" rx="64" ry="50" fill="#fdebc4"/>
+      <ellipse cx="108" cy="396" rx="34" ry="22" fill="#f4b04a"/>
+      <ellipse cx="292" cy="396" rx="34" ry="22" fill="#f4b04a"/>
+      <ellipse cx="166" cy="404" rx="28" ry="19" fill="#fdebc4" stroke="#dc8f2c" stroke-width="2"/>
+      <ellipse cx="234" cy="404" rx="28" ry="19" fill="#fdebc4" stroke="#dc8f2c" stroke-width="2"/>
+      <path d="M166 396 v10 M234 396 v10" stroke="#dc8f2c" stroke-width="2" stroke-linecap="round"/>
+      <path d="M96 124 Q92 62 122 46 Q164 60 182 100 Z" fill="#f4b04a"/>
+      <path d="M304 124 Q308 62 278 46 Q236 60 218 100 Z" fill="#f4b04a"/>
+      <path d="M114 112 Q112 78 124 66 Q146 76 158 100 Z" fill="#e9b98a"/>
+      <path d="M286 112 Q288 78 276 66 Q254 76 242 100 Z" fill="#e9b98a"/>
+      <ellipse cx="200" cy="182" rx="124" ry="98" fill="#f4b04a"/>
+      <path d="M200 92 v26 M176 98 l6 22 M224 98 l-6 22" stroke="#dc8f2c" stroke-width="8" stroke-linecap="round"/>
+      <path d="M130 270 Q200 304 270 270" fill="none" stroke="#3f7fa6" stroke-width="13" stroke-linecap="round"/>
+      <circle cx="200" cy="292" r="11" fill="#f2c94c" stroke="#d1a02a" stroke-width="3"/>
+      <ellipse cx="200" cy="224" rx="36" ry="25" fill="#fdebc4"/>
+      <path d="M84 196 l20 4 M80 212 l22 0 M86 228 l20 -4 M316 196 l-20 4 M320 212 l-22 0 M314 228 l-20 -4" stroke="#dc8f2c" stroke-width="6" stroke-linecap="round"/>
+      <g id="open">
+        <circle cx="146" cy="176" r="34" fill="url(#eg)" stroke="#5aa63a" stroke-width="3"/>
+        <circle cx="254" cy="176" r="34" fill="url(#eg)" stroke="#5aa63a" stroke-width="3"/>
+        <ellipse cx="146" cy="180" rx="14" ry="22" fill="#1b2e14"/>
+        <ellipse cx="254" cy="180" rx="14" ry="22" fill="#1b2e14"/>
+        <circle cx="136" cy="164" r="10" fill="#fff"/><circle cx="244" cy="164" r="10" fill="#fff"/>
+        <circle cx="157" cy="192" r="5" fill="#fff"/><circle cx="265" cy="192" r="5" fill="#fff"/>
+      </g>
+      <g id="happy">
+        <path d="M114 186 A32 32 0 0 1 178 186" fill="none" stroke="#5a3a22" stroke-width="8" stroke-linecap="round"/>
+        <path d="M222 186 A32 32 0 0 1 286 186" fill="none" stroke="#5a3a22" stroke-width="8" stroke-linecap="round"/>
+        <ellipse cx="200" cy="242" rx="8" ry="7" fill="#f08a7e"/>
+      </g>
+      <polygon points="190,210 210,210 200,222" fill="#d98a7a" stroke="#d98a7a" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M200 222 v6 M200 228 q-10 10 -20 2 M200 228 q10 10 20 2" fill="none" stroke="#a8613a" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M150 226 L84 214 M150 234 L82 240 M250 226 L316 214 M250 234 L318 240" stroke="#c27a22" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+    </svg>
+  </div>
+  <div id="msg" aria-live="polite">Hi there! Simba is so happy to see you ♥</div>
+  <p id="from"></p>
+  <p id="count">Love received: 0</p>
+  <button id="snd" aria-pressed="true">Purr sound: on</button>
+</main>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i);};
+  var cat=$("cat"),stage=$("stage"),msg=$("msg"),i;
+  var q=new URLSearchParams(location.search),to=q.get("to"),fr=q.get("from");
+  if(to)$("sub").textContent="Simba has a message for "+to+". Gently pet him.";
+  if(fr)$("from").textContent="With love from "+fr;
+  var M=["Simba thinks you’re the sweetest human ever. ♥","Purr purr… that means I love you!","You’re my favorite lap in the whole world.","Simba will always keep watch over you. ♥","You’re worth a thousand head boops!","Simba is purring just for you. Can you feel it?","You’re purr-fect, just the way you are.","Warm hugs, soft paws and lots of love. ♥","Simba would share his favorite blanket with you.","You make Simba’s heart go pitter-patter!","Today is a good day because of you.","Simba sends you a big, fluffy hug.","You’re even better than a warm sunbeam. ☀","Simba is so lucky to be loved by you.","Sending you cuddles, kisses and a very happy purr. ♡"];
+  var order=[],n=0,dist=0,last=null,pressed=false,pt,st,ac=null,pg=null,on=true;
+  function shuffle(){order=M.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;});}
+  shuffle();
+  function initAudio(){
+    if(ac)return;var C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+    try{
+      ac=new C();var len=ac.sampleRate*2,buf=ac.createBuffer(1,len,ac.sampleRate),d=buf.getChannelData(0),k;
+      for(k=0;k<len;k++)d[k]=Math.random()*2-1;
+      var src=ac.createBufferSource();src.buffer=buf;src.loop=true;
+      var bp=ac.createBiquadFilter();bp.type="bandpass";bp.frequency.value=220;bp.Q.value=.8;
+      var amp=ac.createGain();amp.gain.value=.5;
+      var lfo=ac.createOscillator();lfo.frequency.value=25;
+      var depth=ac.createGain();depth.gain.value=.5;lfo.connect(depth);depth.connect(amp.gain);
+      var o=ac.createOscillator();o.type="sine";o.frequency.value=70;
+      var og=ac.createGain();og.gain.value=.35;
+      pg=ac.createGain();pg.gain.value=0;
+      src.connect(bp);bp.connect(amp);o.connect(og);og.connect(amp);amp.connect(pg);pg.connect(ac.destination);
+      src.start();lfo.start();o.start();
+    }catch(e){ac=null;}
+  }
+  function purrSound(){
+    if(!on)return;initAudio();if(!ac||!pg)return;
+    if(ac.state==="suspended")ac.resume();
+    var t=ac.currentTime;pg.gain.cancelScheduledValues(t);pg.gain.setTargetAtTime(.7,t,.15);
+    clearTimeout(st);st=setTimeout(function(){pg.gain.setTargetAtTime(0,ac.currentTime,.3);},1100);
+  }
+  $("snd").addEventListener("click",function(){
+    on=!on;this.textContent="Purr sound: "+(on?"on":"off");this.setAttribute("aria-pressed",on);
+    if(!on&&pg)pg.gain.setTargetAtTime(0,ac.currentTime,.05);
+  });
+  function hearts(x,y,k){
+    for(var j=0;j<k;j++){
+      var h=document.createElement("span");h.className="heart";h.textContent=["♥","♡","✦"][Math.floor(Math.random()*3)];
+      h.style.left=(x+(Math.random()*60-30))+"px";h.style.top=(y+(Math.random()*30-15))+"px";
+      stage.appendChild(h);setTimeout(function(e){return function(){e.remove();};}(h),1900);
+    }
+  }
+  function love(x,y){
+    if(!order.length)shuffle();
+    msg.textContent=M[order.pop()];
+    msg.classList.remove("pop");void msg.offsetWidth;msg.classList.add("pop");
+    n++;$("count").textContent="Love received: "+n;
+    hearts(x,y,4);
+    try{navigator.vibrate&&navigator.vibrate(30);}catch(e){}
+  }
+  function purr(){cat.classList.add("purr");purrSound();clearTimeout(pt);pt=setTimeout(function(){cat.classList.remove("purr");},1200);}
+  function pos(e){var r=stage.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+  cat.addEventListener("pointerdown",function(e){pressed=true;last=pos(e);dist=0;purr();cat.setPointerCapture(e.pointerId);});
+  cat.addEventListener("pointermove",function(e){
+    if(!pressed)return;var p=pos(e);
+    dist+=Math.abs(p[0]-last[0])+Math.abs(p[1]-last[1]);last=p;purr();
+    if(dist>260){dist=0;love(p[0],p[1]);}
+  });
+  cat.addEventListener("pointerup",function(e){
+    if(!pressed)return;pressed=false;
+    if(dist<30){var p=pos(e);love(p[0],p[1]);}
+  });
+  cat.addEventListener("pointercancel",function(){pressed=false;});
+  for(i=0;i<12;i++){
+    var b=document.createElement("div"),s=40+Math.random()*90;b.className="glow";
+    b.style.width=b.style.height=s+"px";b.style.left=Math.random()*92+"vw";
+    b.style.animationDuration=(14+Math.random()*12)+"s";b.style.animationDelay=(-Math.random()*20)+"s";
+    document.body.appendChild(b);
+  }
+})();
+</script>
+</body>
+</html>
