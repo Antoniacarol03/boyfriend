@@ -84,7 +84,6 @@ h1{font-size:clamp(2.2rem,10vw,3rem);margin:6px 0 2px;color:var(--title);font-we
   <div id="msg" aria-live="polite">Hi there! Simba is so happy to see you ♥</div>
   <p id="from"></p>
   <p id="count">Love received: 0</p>
-  <button id="snd" aria-pressed="true">Purr sound: on</button>
 </main>
 <script>
 (function(){
@@ -97,33 +96,6 @@ h1{font-size:clamp(2.2rem,10vw,3rem);margin:6px 0 2px;color:var(--title);font-we
   var order=[],n=0,dist=0,last=null,pressed=false,pt,st,ac=null,pg=null,on=true;
   function shuffle(){order=M.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;});}
   shuffle();
-  function initAudio(){
-    if(ac)return;var C=window.AudioContext||window.webkitAudioContext;if(!C)return;
-    try{
-      ac=new C();var len=ac.sampleRate*2,buf=ac.createBuffer(1,len,ac.sampleRate),d=buf.getChannelData(0),k;
-      for(k=0;k<len;k++)d[k]=Math.random()*2-1;
-      var src=ac.createBufferSource();src.buffer=buf;src.loop=true;
-      var bp=ac.createBiquadFilter();bp.type="bandpass";bp.frequency.value=220;bp.Q.value=.8;
-      var amp=ac.createGain();amp.gain.value=.5;
-      var lfo=ac.createOscillator();lfo.frequency.value=25;
-      var depth=ac.createGain();depth.gain.value=.5;lfo.connect(depth);depth.connect(amp.gain);
-      var o=ac.createOscillator();o.type="sine";o.frequency.value=70;
-      var og=ac.createGain();og.gain.value=.35;
-      pg=ac.createGain();pg.gain.value=0;
-      src.connect(bp);bp.connect(amp);o.connect(og);og.connect(amp);amp.connect(pg);pg.connect(ac.destination);
-      src.start();lfo.start();o.start();
-    }catch(e){ac=null;}
-  }
-  function purrSound(){
-    if(!on)return;initAudio();if(!ac||!pg)return;
-    if(ac.state==="suspended")ac.resume();
-    var t=ac.currentTime;pg.gain.cancelScheduledValues(t);pg.gain.setTargetAtTime(.7,t,.15);
-    clearTimeout(st);st=setTimeout(function(){pg.gain.setTargetAtTime(0,ac.currentTime,.3);},1100);
-  }
-  $("snd").addEventListener("click",function(){
-    on=!on;this.textContent="Purr sound: "+(on?"on":"off");this.setAttribute("aria-pressed",on);
-    if(!on&&pg)pg.gain.setTargetAtTime(0,ac.currentTime,.05);
-  });
   function hearts(x,y,k){
     for(var j=0;j<k;j++){
       var h=document.createElement("span");h.className="heart";h.textContent=["♥","♡","✦"][Math.floor(Math.random()*3)];
@@ -139,7 +111,7 @@ h1{font-size:clamp(2.2rem,10vw,3rem);margin:6px 0 2px;color:var(--title);font-we
     hearts(x,y,4);
     try{navigator.vibrate&&navigator.vibrate(30);}catch(e){}
   }
-  function purr(){cat.classList.add("purr");purrSound();clearTimeout(pt);pt=setTimeout(function(){cat.classList.remove("purr");},1200);}
+  function purr(){cat.classList.add("purr");clearTimeout(pt);pt=setTimeout(function(){cat.classList.remove("purr");},1200);}
   function pos(e){var r=stage.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
   cat.addEventListener("pointerdown",function(e){pressed=true;last=pos(e);dist=0;purr();cat.setPointerCapture(e.pointerId);});
   cat.addEventListener("pointermove",function(e){
