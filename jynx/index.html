@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pet Jynx</title>
+<style>
+:root{--bg1:#4b3b7a;--bg2:#8d70b8;--ink:#fff7e0;--card:#fff7e0;--card-ink:#3a2b5c;--gold:#ffd23f;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg1:#4b3b7a;--bg2:#8d70b8}}
+:root[data-theme="dark"]{--bg1:#4b3b7a;--bg2:#8d70b8}
+html,body{margin:0;min-height:100%}
+body{background:linear-gradient(var(--bg1),var(--bg2)) fixed;color:var(--ink);font-family:"Trebuchet MS",Verdana,sans-serif;text-align:center;overflow-x:hidden}
+.star{position:fixed;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.7;animation:tw 3s infinite alternate;pointer-events:none}
+@keyframes tw{to{opacity:.1}}
+.moon{position:fixed;top:calc(env(safe-area-inset-top,0px) + 18px);right:18px;width:54px;height:54px;border-radius:50%;box-shadow:-14px 6px 0 0 var(--gold);transform:rotate(-20deg);pointer-events:none}
+main{max-width:480px;margin:0 auto;padding:24px 16px 40px;position:relative}
+h1{font-size:clamp(2rem,9vw,2.8rem);margin:6px 0 2px}
+.sub{margin:0 0 8px}
+.stage{position:relative}
+#cat{width:100%;max-width:400px;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+#cat.purr{animation:purr .12s linear infinite}
+@keyframes purr{0%,100%{transform:translateX(0)}50%{transform:translateX(2px) scale(1.01)}}
+#tail{transform-origin:292px 368px;animation:sway 2.4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+#happy{display:none}
+#cat.purr #happy{display:inline}
+#cat.purr #open{display:none}
+.heart{position:absolute;pointer-events:none;font-size:28px;animation:up 1.6s ease-out forwards}
+@keyframes up{to{transform:translateY(-150px) scale(1.4);opacity:0}}
+#msg{background:var(--card);color:var(--card-ink);border-radius:22px;padding:18px 20px;margin:14px auto 0;max-width:420px;min-height:3.2em;font-size:1.25rem;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}
+#msg.pop{animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+#count{margin:12px 0 0;font-size:.95rem;opacity:.9}
+@media (prefers-reduced-motion: reduce){#tail,.star,#cat.purr{animation:none}}
+</style>
+</head>
+<body>
+<div class="moon" aria-hidden="true"></div>
+<main>
+  <h1>Pet Jynx 🐈‍⬛</h1>
+  <p class="sub" id="sub">Tap or stroke him to get a love message</p>
+  <div class="stage" id="stage">
+    <svg id="cat" viewBox="0 0 400 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Jynx the black cat with yellow half-moon eyes. Pet him to receive a love message.">
+      <ellipse cx="200" cy="418" rx="130" ry="8" fill="rgba(0,0,0,.25)"/>
+      <path id="tail" d="M292 368 Q375 350 360 290 Q352 250 372 232" fill="none" stroke="#0d0d10" stroke-width="26" stroke-linecap="round"/>
+      <ellipse cx="200" cy="335" rx="108" ry="85" fill="#0d0d10"/>
+      <ellipse cx="158" cy="406" rx="32" ry="17" fill="#0d0d10" stroke="#2a2540" stroke-width="2"/>
+      <ellipse cx="242" cy="406" rx="32" ry="17" fill="#0d0d10" stroke="#2a2540" stroke-width="2"/>
+      <polygon points="108,150 120,45 185,108" fill="#0d0d10" stroke="#2a2540" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="292,150 280,45 215,108" fill="#0d0d10" stroke="#2a2540" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="125,125 130,76 164,106" fill="#c46a8a"/>
+      <polygon points="275,125 270,76 236,106" fill="#c46a8a"/>
+      <ellipse cx="200" cy="190" rx="108" ry="92" fill="#0d0d10" stroke="#2a2540" stroke-width="3"/>
+      <g id="open">
+        <path d="M122 176 A38 38 0 0 0 198 176 Z" fill="#ffd23f"/>
+        <path d="M202 176 A38 38 0 0 0 278 176 Z" fill="#ffd23f"/>
+        <ellipse cx="160" cy="196" rx="6" ry="15" fill="#0d0d10"/>
+        <ellipse cx="240" cy="196" rx="6" ry="15" fill="#0d0d10"/>
+      </g>
+      <g id="happy">
+        <path d="M128 200 A32 32 0 0 1 192 200" fill="none" stroke="#ffd23f" stroke-width="13" stroke-linecap="round"/>
+        <path d="M208 200 A32 32 0 0 1 272 200" fill="none" stroke="#ffd23f" stroke-width="13" stroke-linecap="round"/>
+      </g>
+      <polygon points="189,222 211,222 200,236" fill="#d9779a"/>
+      <path d="M200 236 Q200 248 186 250 M200 236 Q200 248 214 250" fill="none" stroke="#d9779a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M130 228 L70 218 M130 238 L68 244 M270 228 L330 218 M270 238 L332 244" stroke="#e8e2f5" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+    </svg>
+  </div>
+  <div id="msg" aria-live="polite">Say hi to Jynx 💛</div>
+  <p id="count">Love received: 0</p>
+</main>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i);};
+  var cat=$("cat"),stage=$("stage"),msg=$("msg");
+  var to=new URLSearchParams(location.search).get("to");
+  if(to){$("sub").textContent="Jynx has some love for "+to+". Pet him!";}
+  var M=["You are loved more than tuna. 🐟","Jynx says: you’re my favorite human.","Even in the dark, you shine like a little moon. 🌙","Purrrr… you make everything softer.","Jynx guards your heart at night.","You’re worth every nap in the sun. ☀️","Someone out there is so lucky to know you.","Jynx chose you. That’s a big deal.","You deserve all the head boops. 💛","Sending you nine lives of love.","Your smile is my favorite thing, says Jynx.","Jynx will always save you the warm spot.","You’re the reason I purr.","Today, be as gentle with yourself as you are with others.","Jynx loves you to the moon and back. 🌙"];
+  var order=[],n=0,dist=0,last=null,pressed=false,pt,hv;
+  function shuffle(){order=M.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;});}
+  shuffle();
+  function hearts(x,y,k){
+    for(var i=0;i<k;i++){
+      var h=document.createElement("span");h.className="heart";h.textContent=["💛","💖","🌙","💕"][Math.floor(Math.random()*4)];
+      h.style.left=(x+(Math.random()*60-30))+"px";h.style.top=(y+(Math.random()*30-15))+"px";
+      stage.appendChild(h);setTimeout(function(e){return function(){e.remove();};}(h),1700);
+    }
+  }
+  function love(x,y){
+    if(!order.length)shuffle();
+    msg.textContent=M[order.pop()];
+    msg.classList.remove("pop");void msg.offsetWidth;msg.classList.add("pop");
+    n++;$("count").textContent="Love received: "+n;
+    hearts(x,y,4);
+    try{navigator.vibrate&&navigator.vibrate(30);}catch(e){}
+  }
+  function purr(){cat.classList.add("purr");clearTimeout(pt);pt=setTimeout(function(){cat.classList.remove("purr");},1200);}
+  function pos(e){var r=stage.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+  cat.addEventListener("pointerdown",function(e){pressed=true;last=pos(e);dist=0;purr();cat.setPointerCapture(e.pointerId);});
+  cat.addEventListener("pointermove",function(e){
+    if(!pressed)return;var p=pos(e);
+    dist+=Math.abs(p[0]-last[0])+Math.abs(p[1]-last[1]);last=p;purr();
+    if(dist>260){dist=0;love(p[0],p[1]);}
+  });
+  function end(e){
+    if(!pressed)return;pressed=false;
+    if(dist<30){var p=pos(e);love(p[0],p[1]);}
+  }
+  cat.addEventListener("pointerup",end);
+  cat.addEventListener("pointercancel",function(){pressed=false;});
+  for(var i=0;i<28;i++){
+    var s=document.createElement("div");s.className="star";
+    s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*70+"vh";
+    s.style.animationDelay=Math.random()*3+"s";document.body.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
