@@ -40,7 +40,7 @@ h1{font-size:clamp(2.2rem,10vw,3rem);margin:6px 0 2px;color:var(--title);font-we
 <body>
 <main>
   <h1>Simba</h1>
-  <p class="sub" id="sub">Pet Simba to hear him purr and get a little love ♥</p>
+  <p class="sub" id="sub">Pet Simba to get a little love ♥</p>
   <div class="stage" id="stage">
     <svg id="cat" viewBox="0 0 400 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simba, a cute round yellow cat with big light green eyes. Pet him to receive a love message.">
       <defs><radialGradient id="eg" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#eaffcf"/><stop offset="1" stop-color="#8fd45f"/></radialGradient></defs>
@@ -96,10 +96,7 @@ h1{font-size:clamp(2.2rem,10vw,3rem);margin:6px 0 2px;color:var(--title);font-we
   var order=[],n=0,dist=0,last=null,pressed=false,pt,st,ac=null,pg=null,on=true;
   function shuffle(){order=M.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;});}
   shuffle();
-<<<<<<< HEAD
-=======
 
->>>>>>> 0bacdb9f801178c762b884e94f7ce4d6bf84bbd6
   function hearts(x,y,k){
     for(var j=0;j<k;j++){
       var h=document.createElement("span");h.className="heart";h.textContent=["♥","♡","✦"][Math.floor(Math.random()*3)];
